@@ -1,0 +1,18 @@
+name: Feature proposal
+description: Propose a portable sanitized Markdown capability
+title: "[Proposal] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+    validations:
+      required: true
+  - type: textarea
+    id: policy
+    attributes:
+      label: Markdown and sanitization policy
+      description: Describe parser behavior, malformed-input recovery, and safe output requirements.
+    validations:
+      required: true

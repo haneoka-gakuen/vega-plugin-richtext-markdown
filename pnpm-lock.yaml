@@ -1,0 +1,44 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@haneoka/vega-plugin-richtext-html':
+        specifier: ^0.1.0
+        version: link:.dependencies/vega-plugin-richtext-html
+      marked:
+        specifier: 18.0.7
+        version: 18.0.7
+    devDependencies:
+      '@haneoka/vega':
+        specifier: workspace:*
+        version: link:.dependencies/vega
+      '@haneoka/vega-plugin-richtext':
+        specifier: workspace:*
+        version: link:.dependencies/vega-plugin-richtext
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+packages:
+
+  marked@18.0.7:
+    resolution: {integrity: sha512-iDVQ5ldaiKXn6b2JroX5kgRfmwgqolW7NpaEzTl1k/2Zh1njIEN9yniyLV/mOvWwtsE8OGgkjsCYvijuPk1dtA==}
+    engines: {node: '>= 20'}
+    hasBin: true
+
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+snapshots:
+
+  marked@18.0.7: {}
+
+  typescript@6.0.3: {}
