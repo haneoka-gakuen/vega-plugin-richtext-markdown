@@ -9,4 +9,3 @@ linkWorkspacePackages: true
 
 allowBuilds:
   esbuild: true
-

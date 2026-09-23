@@ -1,8 +1,4 @@
-import {
-  defineVegaPlugin,
-  type VegaPlugin,
-  type VegaPluginContext,
-} from "@haneoka/vega/plugin";
+import { defineVegaPlugin, type VegaPlugin, type VegaPluginContext } from "@haneoka/vega/plugin";
 import {
   VEGA_RICH_TEXT_SERVICE,
   type VegaRichTextHandle,
@@ -23,10 +19,7 @@ const markdownParser = new Marked({
  * Parse Markdown, then pass every byte of generated HTML through the shared
  * strict HTML sanitizer. Marked output is never exposed as a trusted result.
  */
-export const markdownToSanitizedFragment = (
-  document: Document,
-  source: string,
-): DocumentFragment => {
+export const markdownToSanitizedFragment = (document: Document, source: string): DocumentFragment => {
   const parsed = markdownParser.parse(String(source), { async: false });
   if (typeof parsed !== "string") {
     throw new TypeError("Marked unexpectedly returned an asynchronous result");
@@ -34,25 +27,19 @@ export const markdownToSanitizedFragment = (
   return sanitizeHtmlToFragment(document, parsed);
 };
 
-export const vegaMarkdownRichTextRenderer: VegaRichTextRenderer =
-  Object.freeze({
-    id: "vega-markdown",
-    formats: ["markdown", "md"],
-    render({ document, signal, source }: VegaRichTextRenderRequest) {
-      if (signal.aborted) return document.createDocumentFragment();
-      return markdownToSanitizedFragment(document, source);
-    },
-  });
+export const vegaMarkdownRichTextRenderer: VegaRichTextRenderer = Object.freeze({
+  id: "vega-markdown",
+  formats: ["markdown", "md"],
+  render({ document, signal, source }: VegaRichTextRenderRequest) {
+    if (signal.aborted) return document.createDocumentFragment();
+    return markdownToSanitizedFragment(document, source);
+  },
+});
 
-const registerRenderer = (
-  context: VegaPluginContext,
-  renderer: VegaRichTextRenderer,
-): VegaRichTextHandle => {
+const registerRenderer = (context: VegaPluginContext, renderer: VegaRichTextRenderer): VegaRichTextHandle => {
   const service = context.service(VEGA_RICH_TEXT_SERVICE);
   if (!service) {
-    throw new ReferenceError(
-      "Vega Markdown rich text requires haneoka.vega-richtext",
-    );
+    throw new ReferenceError("Vega Markdown rich text requires haneoka.vega-richtext");
   }
   return service.register(renderer);
 };
@@ -71,15 +58,11 @@ export const createVegaMarkdownRichTextPlugin = (): VegaPlugin =>
       },
     },
     setup(context) {
-      const registration = registerRenderer(
-        context,
-        vegaMarkdownRichTextRenderer,
-      );
+      const registration = registerRenderer(context, vegaMarkdownRichTextRenderer);
       return { dispose: () => registration.dispose() };
     },
   });
 
-export const vegaMarkdownRichTextPlugin =
-  createVegaMarkdownRichTextPlugin();
+export const vegaMarkdownRichTextPlugin = createVegaMarkdownRichTextPlugin();
 
 export default vegaMarkdownRichTextPlugin;
