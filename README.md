@@ -32,4 +32,6 @@ await host.install(vegaMarkdownRichTextPlugin);
   schemes are removed.
 - Consumers needing a different policy can register a separate renderer.
 
-MPL-2.0.
+## License
+
+[MPL-2.0](LICENSE).
